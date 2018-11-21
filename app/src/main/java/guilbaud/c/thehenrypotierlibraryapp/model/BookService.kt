@@ -7,8 +7,15 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 
+/**
+ * Book service in charge of the interaction with the online API
+ * @author Chloe GUILBAUD
+ */
 class BookService {
 
+    /**
+     * Fetches books and returns the list from http://henri-potier.xebia.fr/
+     */
     fun fetchBooks() {
 
         // Plant logger cf. Android Timber
