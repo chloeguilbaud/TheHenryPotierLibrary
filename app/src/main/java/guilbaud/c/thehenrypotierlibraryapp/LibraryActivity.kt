@@ -1,15 +1,25 @@
 package guilbaud.c.thehenrypotierlibraryapp
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.annotation.VisibleForTesting
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.FrameLayout
+import guilbaud.c.thehenrypotierlibraryapp.fragment.FragmentBookDetail
+import guilbaud.c.thehenrypotierlibraryapp.fragment.FragmentBookList
+import guilbaud.c.thehenrypotierlibraryapp.model.BookService
+
 
 class LibraryActivity : AppCompatActivity() {
+
+    @VisibleForTesting
+    lateinit var bookService: BookService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_library)
+
+        bookService = BookService()
 
         val landscape = resources.getBoolean(R.bool.landscape)
 
@@ -28,5 +38,8 @@ class LibraryActivity : AppCompatActivity() {
             findViewById<FrameLayout>(R.id.containerFrameLayout2).visibility = View.VISIBLE
         }
 
+        bookService.fetchBooks();
+
     }
+
 }

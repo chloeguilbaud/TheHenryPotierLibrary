@@ -1,16 +1,17 @@
-package guilbaud.c.thehenrypotierlibraryapp
+package guilbaud.c.thehenrypotierlibraryapp.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import guilbaud.c.thehenrypotierlibraryapp.R
 
-class FragmentBookDetail : Fragment() {
+class FragmentBookList : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = inflater.inflate(R.layout.fragment_bookdetails, container, false)
+        val view = inflater.inflate(R.layout.fragment_booklist, container, false)
 
         return view
     }
