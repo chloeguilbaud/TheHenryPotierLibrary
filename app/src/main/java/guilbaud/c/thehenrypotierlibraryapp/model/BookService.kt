@@ -1,5 +1,6 @@
 package guilbaud.c.thehenrypotierlibraryapp.model
 
+import guilbaud.c.thehenrypotierlibraryapp.LibraryActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,7 +17,9 @@ class BookService {
     /**
      * Fetches books and returns the list from http://henri-potier.xebia.fr/
      */
-    fun fetchBooks() {
+    fun fetchBooks(act : LibraryActivity) : MutableList<Book> {
+
+        var bookList : MutableList<Book> = mutableListOf()
 
         // Plant logger cf. Android Timber
         // Indique comment on va logger
@@ -33,17 +36,19 @@ class BookService {
 
         // TODO listBooks()
 
-        Timber.i("BEFORE GETTING BOOKS HA")
+        Timber.i("BEFORE GETTING BOOKS")
 
         // TODO enqueue call and display book title
         api.listBooks().enqueue(object : Callback<Array<Book>> {
 
             override fun onResponse(call: Call<Array<Book>>?, response: Response<Array<Book>>?) {
-                response!!.body()!!.forEach {
+                act.processBookLib(response!!.body()!!)
+               /* response!!.body()!!.forEach {
                     // TODO log books
                     Timber.i("Book: %s", it.toString())
+                    act.processBookLib(it)
                     // it : itérateur disponible dans l'itération
-                }
+                }*/
                 // !! : check not null
                 //Timber.i(book.getTitle())
             }
@@ -54,7 +59,7 @@ class BookService {
 
         })
 
-
+        return bookList
     }
 
 }

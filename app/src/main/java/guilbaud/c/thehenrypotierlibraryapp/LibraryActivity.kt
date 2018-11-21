@@ -7,7 +7,9 @@ import android.view.View
 import android.widget.FrameLayout
 import guilbaud.c.thehenrypotierlibraryapp.fragment.FragmentBookDetail
 import guilbaud.c.thehenrypotierlibraryapp.fragment.FragmentBookList
+import guilbaud.c.thehenrypotierlibraryapp.model.Book
 import guilbaud.c.thehenrypotierlibraryapp.model.BookService
+import timber.log.Timber
 
 
 class LibraryActivity : AppCompatActivity() {
@@ -38,8 +40,22 @@ class LibraryActivity : AppCompatActivity() {
             findViewById<FrameLayout>(R.id.containerFrameLayout2).visibility = View.VISIBLE
         }
 
-        bookService.fetchBooks();
+        val bookList : MutableList<Book> = bookService.fetchBooks(this);
+        Timber.plant(Timber.DebugTree());
+        Timber.i("BOOK LIST FROM ACTIVIITY" + bookList.size)
+        bookList.forEach {
+            // TODO log books
+            Timber.i("Book Mouha ! : %s", it.toString())
+            // it : itérateur disponible dans l'itération
+        }
 
     }
 
+    fun processBookLib(books : Array<Book>) {
+        books.forEach {
+            // TODO log books
+            Timber.i("Book processBookLib ! : %s", it.toString())
+            // it : itérateur disponible dans l'itération
+        }
+    }
 }
