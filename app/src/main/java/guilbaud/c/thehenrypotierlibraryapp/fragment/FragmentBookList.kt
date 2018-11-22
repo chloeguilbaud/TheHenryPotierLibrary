@@ -25,11 +25,6 @@ class FragmentBookList : Fragment() {
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
 
-    @VisibleForTesting
-    lateinit var bookService: BookService
-
-    private lateinit var onItemClickListener : View.OnClickListener
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_booklist, container, false)
@@ -41,8 +36,7 @@ class FragmentBookList : Fragment() {
      * Book service initialisation
      */
     private fun init() {
-        bookService = BookService()
-        bookService.fetchBooks(this)
+        BookService.fetchBooks(this)
     }
 
     /**

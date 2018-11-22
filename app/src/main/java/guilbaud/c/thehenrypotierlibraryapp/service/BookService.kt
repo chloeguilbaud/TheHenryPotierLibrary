@@ -15,49 +15,51 @@ import timber.log.Timber
  */
 class BookService {
 
-    /**
-     * Fetches books and returns the list from http://henri-potier.xebia.fr/
-     */
-    fun fetchBooks(act : FragmentBookList) {
+    companion object {
 
-        var bookList : MutableList<Book> = mutableListOf()
+        /**
+         * Fetches books and returns the list from http://henri-potier.xebia.fr/
+         */
+        fun fetchBooks(act: FragmentBookList) {
 
-        // Plant Timber logger
-        Timber.plant(Timber.DebugTree())
+            var bookList: MutableList<Book> = mutableListOf()
 
-        // Build Retrofit
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://henri-potier.xebia.fr/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+            // Plant Timber logger
+            Timber.plant(Timber.DebugTree())
 
-        // Create a service
-        val api = retrofit.create(BookApi::class.java)
+            // Build Retrofit
+            val retrofit = Retrofit.Builder()
+                .baseUrl("http://henri-potier.xebia.fr/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
 
-        Timber.i("Book service : Getting book list...")
+            // Create a service
+            val api = retrofit.create(BookApi::class.java)
 
-        // Calling book API
-        api.listBooks().enqueue(object : Callback<Array<Book>> {
+            Timber.i("Book service : Getting book list...")
 
-            override fun onResponse(call: Call<Array<Book>>?, response: Response<Array<Book>>?) {
-                act.onBookServiceSuccess(response!!.body()!!)
-               /* response!!.body()!!.forEach {
+            // Calling book API
+            api.listBooks().enqueue(object : Callback<Array<Book>> {
+
+                override fun onResponse(call: Call<Array<Book>>?, response: Response<Array<Book>>?) {
+                    act.onBookServiceSuccess(response!!.body()!!)
+                    /* response!!.body()!!.forEach {
                     // TODO log books
                     Timber.i("Book: %s", it.toString())
                     act.onBookServiceSuccess(it)
                     // it : itérateur disponible dans l'itération
                 }*/
-                // !! : check not null
-                //Timber.i(book.getTitle())
-            }
+                    // !! : check not null
+                    //Timber.i(book.getTitle())
+                }
 
-            override fun onFailure(call: Call<Array<Book>>?, t: Throwable?) {
-                // TODO act.bookServiceError()
-                Timber.e("FAILLURE \n%s\ncall: %s", t.toString(), call)
-            }
+                override fun onFailure(call: Call<Array<Book>>?, t: Throwable?) {
+                    // TODO act.bookServiceError()
+                    Timber.e("FAILLURE \n%s\ncall: %s", t.toString(), call)
+                }
 
-        })
+            })
 
+        }
     }
-
 }
