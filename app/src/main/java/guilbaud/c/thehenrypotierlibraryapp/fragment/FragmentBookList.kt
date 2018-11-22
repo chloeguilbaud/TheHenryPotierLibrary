@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.annotation.VisibleForTesting
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +11,12 @@ import android.view.ViewGroup
 import guilbaud.c.thehenrypotierlibraryapp.adapter.BookAdapter
 import guilbaud.c.thehenrypotierlibraryapp.R
 import guilbaud.c.thehenrypotierlibraryapp.model.Book
-import guilbaud.c.thehenrypotierlibraryapp.model.BookService
-import timber.log.Timber
+import guilbaud.c.thehenrypotierlibraryapp.service.BookService
 
+/**
+ * Fragment enabling book list display
+ * @author Chloe GUILBAUD
+ */
 class FragmentBookList : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
@@ -24,38 +26,6 @@ class FragmentBookList : Fragment() {
     @VisibleForTesting
     lateinit var bookService: BookService
 
-    private val prenoms = arrayOf(
-        "Bobi",
-        "Chloe",
-        "KK",
-        "Antoine",
-        "Benoit",
-        "Cyril",
-        "David",
-        "Eloise",
-        "Florent",
-        "Gerard",
-        "Hugo",
-        "Ingrid",
-        "Jonathan",
-        "Kevin",
-        "Logan",
-        "Mathieu",
-        "Noemie",
-        "Olivia",
-        "Philippe",
-        "Quentin",
-        "Romain",
-        "Sophie",
-        "Tristan",
-        "Ulric",
-        "Vincent",
-        "Willy",
-        "Xavier",
-        "Yann",
-        "Zoé"
-    )
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_booklist, container, false)
@@ -63,29 +33,32 @@ class FragmentBookList : Fragment() {
         return view
     }
 
+    /**
+     * Book service initialisation
+     */
     private fun init() {
         bookService = BookService()
         bookService.fetchBooks(this)
     }
 
+    /**
+     * Called on book service success request
+     */
     fun onBookServiceSuccess(books : Array<Book>) {
-        books.forEach {
-            Timber.i("Book onBookServiceSuccess ! : %s", it.toString())
-        }
 
-        //viewManager = GridLayoutManager(activity, 2)
+        // Adapter and manager initialisation
         viewManager = GridLayoutManager(activity, 2)
         viewAdapter = BookAdapter(books)
 
         recyclerView = view!!.findViewById<RecyclerView>(R.id.fragment_book_list_view).apply {
-            // use this setting to improve performance if you know that changes
-            // in content do not change the layout size of the RecyclerView
+
+            // Improving performance by fixing layout size for fix content
             setHasFixedSize(true)
 
-            // use a linear layout manager
+            // Setting linear layout manager
             layoutManager = viewManager
 
-            // specify an viewAdapter (see also next example)
+            // Setting view adapter
             adapter = viewAdapter
 
         }

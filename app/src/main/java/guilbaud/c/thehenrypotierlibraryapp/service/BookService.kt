@@ -1,7 +1,7 @@
-package guilbaud.c.thehenrypotierlibraryapp.model
+package guilbaud.c.thehenrypotierlibraryapp.service
 
-import guilbaud.c.thehenrypotierlibraryapp.LibraryActivity
 import guilbaud.c.thehenrypotierlibraryapp.fragment.FragmentBookList
+import guilbaud.c.thehenrypotierlibraryapp.model.Book
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

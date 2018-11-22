@@ -1,5 +1,6 @@
-package guilbaud.c.thehenrypotierlibraryapp.model
+package guilbaud.c.thehenrypotierlibraryapp.service
 
+import guilbaud.c.thehenrypotierlibraryapp.model.Book
 import retrofit2.Call
 import retrofit2.http.GET
 

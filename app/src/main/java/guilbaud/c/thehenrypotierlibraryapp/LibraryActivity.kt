@@ -1,25 +1,13 @@
 package guilbaud.c.thehenrypotierlibraryapp
 
 import android.os.Bundle
-import android.support.annotation.VisibleForTesting
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.ListView
 import guilbaud.c.thehenrypotierlibraryapp.fragment.FragmentBookDetail
 import guilbaud.c.thehenrypotierlibraryapp.fragment.FragmentBookList
-import guilbaud.c.thehenrypotierlibraryapp.model.Book
-import guilbaud.c.thehenrypotierlibraryapp.model.BookService
-import timber.log.Timber
-import android.widget.ArrayAdapter
-
-
-
 
 class LibraryActivity : AppCompatActivity() {
-
 
     var fragmentBookList: FragmentBookList = FragmentBookList()
     var fragmentBookDetail: FragmentBookDetail = FragmentBookDetail()
