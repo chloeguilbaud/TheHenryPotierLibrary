@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:fillViewport="true">
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur nibh at lectus sollicitudin faucibus. Duis placerat ipsum eget orci condimentum tempor. Mauris vitae nibh tempor, malesuada quam in, imperdiet turpis. Aenean convallis, enim a dictum sollicitudin, velit sapien eleifend turpis, eu ullamcorper justo lectus et orci. Fusce gravida quis lectus nec eleifend. Suspendisse lectus sapien, finibus vitae mi ut, sagittis ornare mauris. Nulla gravida lobortis ipsum, ut rhoncus risus fringilla non. Donec pulvinar sed sem vel fermentum. Ut dui nisl, interdum nec blandit id, varius sed sem. Integer fringilla eu augue at suscipit. Vivamus velit ex, rutrum eget molestie sed, porta non massa. In hendrerit condimentum orci, vitae fringilla enim egestas eu. Sed dignissim dictum tristique. Quisque convallis id ipsum et mattis. Praesent blandit, tellus quis auctor pellentesque, lorem ligula tristique quam, eu finibus nisi mi ut lacus.
-
-Ut sapien quam, congue ac facilisis elementum, varius et tortor. Nulla varius suscipit rhoncus. Vivamus tempus malesuada urna in tincidunt. Integer in metus blandit, condimentum nulla at, malesuada libero. Ut ornare lacinia libero, at tincidunt elit accumsan in. Etiam magna tellus, auctor vel posuere vitae, faucibus eget enim. Fusce dignissim ligula sit amet vestibulum tempor. Suspendisse venenatis porttitor mauris ut porttitor. Nullam auctor et arcu sed tempus.
-
-Sed auctor eleifend dui gravida tincidunt. Quisque nec sem sed tellus volutpat placerat. Nulla finibus mauris massa, at interdum dui blandit nec. Proin venenatis pretium odio. In varius purus purus, sed finibus mi posuere sodales. Sed nec felis ut dolor feugiat lacinia feugiat et metus. Integer at fermentum sem. Aliquam ut maximus erat. Praesent aliquam ac nisi tincidunt consequat. Nulla risus eros, aliquam ut diam id, venenatis vulputate augue. Vestibulum nec eros id purus lobortis tempus. Proin at convallis leo, sit amet auctor ante.
-
-Donec at diam eu ligula pellentesque pharetra sed sit amet sapien. Sed est est, fringilla id pulvinar a, consectetur id metus. Sed nec risus placerat, ornare dolor quis, suscipit mauris. Sed eu tincidunt tortor. Aliquam rhoncus, justo non volutpat aliquam, orci ipsum feugiat nunc, at maximus magna velit viverra mi. Vestibulum libero quam, finibus non aliquam ut, commodo in lorem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed sollicitudin, lacus ac rhoncus finibus, urna augue porta mi, id fringilla massa urna sit amet massa. Mauris sagittis dignissim nulla, nec aliquam sapien mollis ut. Mauris finibus libero id enim scelerisque, at pharetra neque porta. Nunc vel mi urna.
-
-Duis a ipsum rhoncus, ultricies nibh eu, egestas diam. Nunc vitae tincidunt tellus. Aenean facilisis, neque sit amet lacinia porttitor, elit tellus porttitor nisl, ut consectetur metus lectus in nunc. Sed eu fringilla purus. Mauris cursus bibendum sodales. Ut purus mauris, aliquam sit amet velit in, bibendum eleifend lorem. Donec gravida nibh ut laoreet vulputate. Vivamus vulputate dolor convallis, tincidunt nisi eu, semper nulla. Aenean bibendum metus lacinia finibus iaculis. Sed sed ornare elit. Cras vestibulum mattis ligula, id malesuada neque placerat eu. Vivamus orci urna, elementum id tortor ac, eleifend varius dui. Morbi vestibulum magna eget ipsum pellentesque blandit."/>
-
-</ScrollView>
+<!-- A RecyclerView with some commonly used attributes -->
+<android.support.v7.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android"/>
