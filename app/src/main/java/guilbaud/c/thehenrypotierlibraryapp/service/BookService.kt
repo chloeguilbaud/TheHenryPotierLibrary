@@ -20,9 +20,7 @@ class BookService {
         /**
          * Fetches books and returns the list from http://henri-potier.xebia.fr/
          */
-        fun fetchBooks(act: FragmentBookList) {
-
-            var bookList: MutableList<Book> = mutableListOf()
+        fun fetchBooks(fragmentBookList: FragmentBookList) {
 
             // Plant Timber logger
             Timber.plant(Timber.DebugTree())
@@ -42,19 +40,11 @@ class BookService {
             api.listBooks().enqueue(object : Callback<Array<Book>> {
 
                 override fun onResponse(call: Call<Array<Book>>?, response: Response<Array<Book>>?) {
-                    act.onBookServiceSuccess(response!!.body()!!)
-                    /* response!!.body()!!.forEach {
-                    // TODO log books
-                    Timber.i("Book: %s", it.toString())
-                    act.onBookServiceSuccess(it)
-                    // it : itérateur disponible dans l'itération
-                }*/
-                    // !! : check not null
-                    //Timber.i(book.getTitle())
+                    fragmentBookList.onBookServiceSuccess(response!!.body()!!)
                 }
 
                 override fun onFailure(call: Call<Array<Book>>?, t: Throwable?) {
-                    // TODO act.bookServiceError()
+                    // TODO fragmentBookList.bookServiceError()
                     Timber.e("FAILLURE \n%s\ncall: %s", t.toString(), call)
                 }
 
