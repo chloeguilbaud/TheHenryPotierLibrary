@@ -1,5 +1,7 @@
 package guilbaud.c.thehenrypotierlibraryapp.fragment
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,10 +10,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import guilbaud.c.thehenrypotierlibraryapp.MyViewModel
 import guilbaud.c.thehenrypotierlibraryapp.adapter.BookAdapter
 import guilbaud.c.thehenrypotierlibraryapp.R
 import guilbaud.c.thehenrypotierlibraryapp.model.Book
-import guilbaud.c.thehenrypotierlibraryapp.service.BookService
 import timber.log.Timber
 
 /**
@@ -25,9 +27,12 @@ class FragmentBookList : Fragment() {
     private lateinit var viewManager: RecyclerView.LayoutManager
 
     private var listener: OnBookItemClickListener? = null
+
+    /**
+     * Gets
+     */
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        // TODO cast context to listener
         when(context) {
             is OnBookItemClickListener -> listener = context
         }
@@ -36,7 +41,29 @@ class FragmentBookList : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_booklist, container, false)
-        init()
+
+        val model = ViewModelProviders.of(this).get(MyViewModel::class.java)
+        model.getBooks().observe(this, Observer<Array<Book>>{ books ->
+
+            // Adapter and manager initialisation
+            viewManager = GridLayoutManager(activity, 2)
+            viewAdapter = BookAdapter(books!!) { book : Book -> bookItemClicked(book) }
+
+            recyclerView = view!!.findViewById<RecyclerView>(R.id.fragment_book_list_view).apply {
+
+                // Improving performance by fixing layout size for fix content
+                setHasFixedSize(true)
+
+                // Setting linear layout manager
+                layoutManager = viewManager
+
+                // Setting view adapter
+                adapter = viewAdapter
+
+            }
+
+        })
+
         return view
     }
 
@@ -44,7 +71,7 @@ class FragmentBookList : Fragment() {
      * Book service initialisation
      */
     private fun init() {
-        BookService.fetchBooks(this)
+
     }
 
     /**
@@ -52,33 +79,18 @@ class FragmentBookList : Fragment() {
      */
     fun onBookServiceSuccess(books : Array<Book>) {
 
-        // Adapter and manager initialisation
-        viewManager = GridLayoutManager(activity, 2)
-        viewAdapter = BookAdapter(books) { book : Book -> bookItemClicked(book) }
 
-        recyclerView = view!!.findViewById<RecyclerView>(R.id.fragment_book_list_view).apply {
-
-            // Improving performance by fixing layout size for fix content
-            setHasFixedSize(true)
-
-            // Setting linear layout manager
-            layoutManager = viewManager
-
-            // Setting view adapter
-            adapter = viewAdapter
-
-        }
 
     }
 
     fun bookItemClicked(book : Book) {
         Timber.plant(Timber.DebugTree())
         Timber.i("Clicked: %s", book.title)
-        listener?.onClick()
+        listener?.onClick(book)
     }
 
     interface OnBookItemClickListener {
-        fun onClick()
+        fun onClick(book : Book)
     }
 
 

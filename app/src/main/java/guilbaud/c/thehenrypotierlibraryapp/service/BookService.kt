@@ -20,7 +20,7 @@ class BookService {
         /**
          * Fetches books and returns the list from http://henri-potier.xebia.fr/
          */
-        fun fetchBooks(fragmentBookList: FragmentBookList) {
+        fun fetchBooks(callback: (Array<Book>) -> Unit){
 
             // Plant Timber logger
             Timber.plant(Timber.DebugTree())
@@ -40,7 +40,7 @@ class BookService {
             api.listBooks().enqueue(object : Callback<Array<Book>> {
 
                 override fun onResponse(call: Call<Array<Book>>?, response: Response<Array<Book>>?) {
-                    fragmentBookList.onBookServiceSuccess(response!!.body()!!)
+                    callback(response!!.body()!!)
                 }
 
                 override fun onFailure(call: Call<Array<Book>>?, t: Throwable?) {
