@@ -1,6 +1,7 @@
 package guilbaud.c.thehenrypotierlibraryapp.fragment
 
 import android.os.Bundle
+import android.support.annotation.VisibleForTesting
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -9,6 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import guilbaud.c.thehenrypotierlibraryapp.adapter.BookAdpter
 import guilbaud.c.thehenrypotierlibraryapp.R
+import guilbaud.c.thehenrypotierlibraryapp.model.Book
+import guilbaud.c.thehenrypotierlibraryapp.model.BookService
+import timber.log.Timber
 
 class FragmentBookList : Fragment() {
 
@@ -16,7 +20,13 @@ class FragmentBookList : Fragment() {
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
 
+    @VisibleForTesting
+    lateinit var bookService: BookService
+
     private val prenoms = arrayOf(
+        "Bobi",
+        "Chloe",
+        "KK",
         "Antoine",
         "Benoit",
         "Cyril",
@@ -48,11 +58,25 @@ class FragmentBookList : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_booklist, container, false)
+        init()
+        return view
+    }
+
+
+    private fun init() {
+        bookService = BookService()
+        bookService.fetchBooks(this)
+    }
+
+    fun onBookServiceSuccess(books : Array<Book>) {
+        books.forEach {
+            Timber.i("Book onBookServiceSuccess ! : %s", it.toString())
+        }
 
         viewManager = GridLayoutManager(activity, 2)
         viewAdapter = BookAdpter(prenoms)
 
-        recyclerView = view.findViewById<RecyclerView>(R.id.my_recycler_view).apply {
+        recyclerView = view!!.findViewById<RecyclerView>(R.id.my_recycler_view).apply {
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
             setHasFixedSize(true)
@@ -65,7 +89,7 @@ class FragmentBookList : Fragment() {
 
         }
 
-        return view
     }
+
 
 }

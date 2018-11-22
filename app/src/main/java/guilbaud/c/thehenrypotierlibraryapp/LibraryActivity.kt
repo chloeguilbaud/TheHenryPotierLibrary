@@ -20,8 +20,9 @@ import android.widget.ArrayAdapter
 
 class LibraryActivity : AppCompatActivity() {
 
-    @VisibleForTesting
-    lateinit var bookService: BookService
+
+    var fragmentBookList: FragmentBookList = FragmentBookList()
+    var fragmentBookDetail: FragmentBookDetail = FragmentBookDetail()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -29,20 +30,8 @@ class LibraryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_library)
 
         // Activity initialisation
-        init()
         initLandscapeMode()
 
-    }
-
-    private fun init() {
-        bookService = BookService()
-        bookService.fetchBooks(this)
-    }
-
-    fun onBookServiceSuccess(books : Array<Book>) {
-        books.forEach {
-            Timber.i("Book onBookServiceSuccess ! : %s", it.toString())
-        }
     }
 
     private fun initLandscapeMode() {
@@ -52,13 +41,13 @@ class LibraryActivity : AppCompatActivity() {
         // Setting fragment in view in first containerFrameLayout1
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.containerFrameLayout1, FragmentBookList())
+            .replace(R.id.containerFrameLayout1, fragmentBookList)
             .commit()
         findViewById<FrameLayout>(R.id.containerFrameLayout2).visibility = View.INVISIBLE
 
         if(landscape) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.containerFrameLayout2, FragmentBookDetail())
+                .replace(R.id.containerFrameLayout2, fragmentBookDetail)
                 .commit()
             findViewById<FrameLayout>(R.id.containerFrameLayout2).visibility = View.VISIBLE
         }

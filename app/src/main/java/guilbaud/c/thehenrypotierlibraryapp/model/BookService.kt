@@ -1,6 +1,7 @@
 package guilbaud.c.thehenrypotierlibraryapp.model
 
 import guilbaud.c.thehenrypotierlibraryapp.LibraryActivity
+import guilbaud.c.thehenrypotierlibraryapp.fragment.FragmentBookList
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,7 +18,7 @@ class BookService {
     /**
      * Fetches books and returns the list from http://henri-potier.xebia.fr/
      */
-    fun fetchBooks(act : LibraryActivity) {
+    fun fetchBooks(act : FragmentBookList) {
 
         var bookList : MutableList<Book> = mutableListOf()
 
