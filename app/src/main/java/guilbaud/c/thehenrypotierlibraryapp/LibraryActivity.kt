@@ -18,15 +18,31 @@ class LibraryActivity : AppCompatActivity() {
     lateinit var bookService: BookService
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_library)
 
+        // Activity initialisation
+        init()
+        initLandscapeMode()
+
+    }
+
+    private fun init() {
         bookService = BookService()
+    }
+
+    fun onBookServiceSuccess(books : Array<Book>) {
+        books.forEach {
+            Timber.i("Book onBookServiceSuccess ! : %s", it.toString())
+        }
+    }
+
+    private fun initLandscapeMode() {
 
         val landscape = resources.getBoolean(R.bool.landscape)
 
-        // TODO replace Step0Fragment in containerFrameLayout
-        // Le fragment est placer dans l'élément containerFrameLayout de la vue
+        // Setting fragment in view in first containerFrameLayout1
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.containerFrameLayout1, FragmentBookList())
@@ -40,13 +56,5 @@ class LibraryActivity : AppCompatActivity() {
             findViewById<FrameLayout>(R.id.containerFrameLayout2).visibility = View.VISIBLE
         }
 
-    }
-
-    fun onBookServiceSuccess(books : Array<Book>) {
-        books.forEach {
-            // TODO log books
-            Timber.i("Book onBookServiceSuccess ! : %s", it.toString())
-            // it : itérateur disponible dans l'itération
-        }
     }
 }
