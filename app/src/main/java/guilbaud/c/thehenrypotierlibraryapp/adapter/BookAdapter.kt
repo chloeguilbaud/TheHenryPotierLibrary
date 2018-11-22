@@ -2,35 +2,43 @@ package guilbaud.c.thehenrypotierlibraryapp.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import guilbaud.c.thehenrypotierlibraryapp.R
 
-class BookAdpter(private val myDataset: Array<String>) : RecyclerView.Adapter<BookAdpter.MyViewHolder>() {
+class BookAdapter(private val myDataset: Array<String>) : RecyclerView.Adapter<BookAdapter.MyViewHolder>() {
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder.
     // Each data item is just a string in this case that is shown in a TextView.
-    class MyViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
+    class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
 
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): MyViewHolder {
         // create a new view
+        /*val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.fragment_booklist, parent, false)
+        val textView = view.findViewById<TextView>(R.id.book_title)*/
+
         val textView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_booklist_item, parent, false) as TextView
+            .inflate(R.layout.fragment_booklist_item, parent, false).findViewById(R.id.book_title) as TextView
         // set the view's size, margins, paddings and layout parameters
 
-        return MyViewHolder(textView)
+        val view : View =  LayoutInflater.from(parent.context)
+            .inflate(R.layout.fragment_booklist_item, parent, false)
+
+        return MyViewHolder(view)
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.textView.text = myDataset[position]
+        holder.view.findViewById<TextView>(R.id.book_title).text = myDataset[position]
     }
 
     // Return the size of your dataset (invoked by the layout manager)

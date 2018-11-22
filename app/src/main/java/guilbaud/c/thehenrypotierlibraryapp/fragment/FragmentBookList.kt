@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.support.annotation.VisibleForTesting
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import guilbaud.c.thehenrypotierlibraryapp.adapter.BookAdpter
+import guilbaud.c.thehenrypotierlibraryapp.adapter.BookAdapter
 import guilbaud.c.thehenrypotierlibraryapp.R
 import guilbaud.c.thehenrypotierlibraryapp.model.Book
 import guilbaud.c.thehenrypotierlibraryapp.model.BookService
@@ -62,7 +63,6 @@ class FragmentBookList : Fragment() {
         return view
     }
 
-
     private fun init() {
         bookService = BookService()
         bookService.fetchBooks(this)
@@ -74,9 +74,10 @@ class FragmentBookList : Fragment() {
         }
 
         viewManager = GridLayoutManager(activity, 2)
-        viewAdapter = BookAdpter(prenoms)
+        //viewManager = LinearLayoutManager(activity)
+        viewAdapter = BookAdapter(prenoms)
 
-        recyclerView = view!!.findViewById<RecyclerView>(R.id.my_recycler_view).apply {
+        recyclerView = view!!.findViewById<RecyclerView>(R.id.fragment_book_list_view).apply {
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
             setHasFixedSize(true)
