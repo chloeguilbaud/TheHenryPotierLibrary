@@ -1,11 +1,12 @@
-package guilbaud.c.thehenrypotierlibraryapp
+package guilbaud.c.thehenrypotierlibraryapp.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import guilbaud.c.thehenrypotierlibraryapp.R
 
-class MyAdapter(private val myDataset: Array<String>) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class BookAdpter(private val myDataset: Array<String>) : RecyclerView.Adapter<BookAdpter.MyViewHolder>() {
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -16,10 +17,10 @@ class MyAdapter(private val myDataset: Array<String>) : RecyclerView.Adapter<MyA
 
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): MyAdapter.MyViewHolder {
+                                    viewType: Int): MyViewHolder {
         // create a new view
         val textView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.my_text_view, parent, false) as TextView
+            .inflate(R.layout.fragment_booklist_item, parent, false) as TextView
         // set the view's size, margins, paddings and layout parameters
 
         return MyViewHolder(textView)
