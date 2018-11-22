@@ -10,7 +10,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 app:srcCompat="@drawable/no_photo_found"
-                android:id="@+id/imageView3"
+                android:id="@+id/book_cover"
                 android:layout_weight="1"/>
         <TextView
                 android:layout_width="wrap_content"
