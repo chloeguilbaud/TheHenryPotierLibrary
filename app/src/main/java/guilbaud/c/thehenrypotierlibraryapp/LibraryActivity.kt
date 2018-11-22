@@ -23,39 +23,6 @@ class LibraryActivity : AppCompatActivity() {
     @VisibleForTesting
     lateinit var bookService: BookService
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
-    private lateinit var viewManager: RecyclerView.LayoutManager
-
-    private val prenoms = arrayOf(
-        "Antoine",
-        "Benoit",
-        "Cyril",
-        "David",
-        "Eloise",
-        "Florent",
-        "Gerard",
-        "Hugo",
-        "Ingrid",
-        "Jonathan",
-        "Kevin",
-        "Logan",
-        "Mathieu",
-        "Noemie",
-        "Olivia",
-        "Philippe",
-        "Quentin",
-        "Romain",
-        "Sophie",
-        "Tristan",
-        "Ulric",
-        "Vincent",
-        "Willy",
-        "Xavier",
-        "Yann",
-        "Zoé"
-    )
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -64,22 +31,6 @@ class LibraryActivity : AppCompatActivity() {
         // Activity initialisation
         init()
         initLandscapeMode()
-
-        viewManager = LinearLayoutManager(this)
-        viewAdapter = MyAdapter(prenoms)
-
-        recyclerView = findViewById<RecyclerView>(R.id.my_recycler_view).apply {
-            // use this setting to improve performance if you know that changes
-            // in content do not change the layout size of the RecyclerView
-            setHasFixedSize(true)
-
-            // use a linear layout manager
-            layoutManager = viewManager
-
-            // specify an viewAdapter (see also next example)
-            adapter = viewAdapter
-
-        }
 
     }
 
@@ -99,7 +50,7 @@ class LibraryActivity : AppCompatActivity() {
         val landscape = resources.getBoolean(R.bool.landscape)
 
         // Setting fragment in view in first containerFrameLayout1
-        /*supportFragmentManager
+        supportFragmentManager
             .beginTransaction()
             .replace(R.id.containerFrameLayout1, FragmentBookList())
             .commit()
@@ -110,7 +61,7 @@ class LibraryActivity : AppCompatActivity() {
                 .replace(R.id.containerFrameLayout2, FragmentBookDetail())
                 .commit()
             findViewById<FrameLayout>(R.id.containerFrameLayout2).visibility = View.VISIBLE
-        }*/
+        }
 
     }
 }
