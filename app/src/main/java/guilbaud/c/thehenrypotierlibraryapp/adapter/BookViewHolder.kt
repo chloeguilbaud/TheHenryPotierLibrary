@@ -12,11 +12,11 @@ import guilbaud.c.thehenrypotierlibraryapp.model.Book
 class BookViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(book: Book, clickListener: (Book) -> Unit) {
-        /*val imageView = view.findViewById<ImageView>(R.id.book_cover)
+        val imageView = view.findViewById<ImageView>(R.id.book_cover)
         Glide
-            .with(this)
+            .with(view)
             .load(book.cover)
-            .into(imageView);*/
+            .into(imageView);
         view.findViewById<TextView>(R.id.book_title).text = book.title
         view.findViewById<TextView>(R.id.book_price).text = book.price
         view.setOnClickListener { clickListener(book) }

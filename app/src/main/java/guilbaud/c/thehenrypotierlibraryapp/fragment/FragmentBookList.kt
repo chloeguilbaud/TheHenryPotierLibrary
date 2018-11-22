@@ -71,7 +71,7 @@ class FragmentBookList : Fragment() {
 
     fun bookItemClicked(book : Book) {
         Timber.plant(Timber.DebugTree())
-        Timber.i("Clicked: " + book.title)
+        Timber.i("Clicked: %s", book.title)
     }
 
 
