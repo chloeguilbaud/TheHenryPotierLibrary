@@ -15,6 +15,7 @@ import guilbaud.c.thehenrypotierlibraryapp.adapter.BookAdapter
 import guilbaud.c.thehenrypotierlibraryapp.R
 import guilbaud.c.thehenrypotierlibraryapp.model.Book
 import timber.log.Timber
+import java.nio.channels.Selector
 
 /**
  * Fragment enabling book list display
@@ -25,6 +26,9 @@ class FragmentBookList : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
+
+    private var model: MyViewModel = MyViewModel()
+    private lateinit var itemSelector: Selector
 
     private var listener: OnBookItemClickListener? = null
 
@@ -64,6 +68,7 @@ class FragmentBookList : Fragment() {
 
         })
 
+
         return view
     }
 
@@ -84,13 +89,12 @@ class FragmentBookList : Fragment() {
     }
 
     fun bookItemClicked(book : Book) {
-        Timber.plant(Timber.DebugTree())
-        Timber.i("Clicked: %s", book.title)
-        listener?.onClick(book)
+        model.select(book)
+        listener?.onClick()
     }
 
     interface OnBookItemClickListener {
-        fun onClick(book : Book)
+        fun onClick()
     }
 
 

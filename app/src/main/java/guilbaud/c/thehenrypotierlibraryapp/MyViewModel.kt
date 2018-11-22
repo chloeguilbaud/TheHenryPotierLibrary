@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import guilbaud.c.thehenrypotierlibraryapp.model.Book
 import guilbaud.c.thehenrypotierlibraryapp.service.BookService
+import timber.log.Timber
 
 class MyViewModel : ViewModel() {
 
@@ -25,4 +26,11 @@ class MyViewModel : ViewModel() {
     fun updateData(bookList : Array<Book>) {
         books.value = bookList
     }
+
+    val selected = MutableLiveData<Book>()
+
+    fun select(book: Book) {
+        selected.value = book
+    }
+
 }
