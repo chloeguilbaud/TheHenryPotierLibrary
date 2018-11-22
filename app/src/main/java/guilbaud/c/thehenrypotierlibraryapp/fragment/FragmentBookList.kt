@@ -2,11 +2,13 @@ package guilbaud.c.thehenrypotierlibraryapp.fragment
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +48,34 @@ class FragmentBookList : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_booklist, container, false)
 
-        val model = ViewModelProviders.of(this).get(MyViewModel::class.java)
+        /* Called on Activity onCreate() */
+
+        activity?.let {
+            model = ViewModelProviders.of(it).get(MyViewModel::class.java)
+            model.getBooks().observe(this, Observer {
+                it?.let {books ->
+                    // do some thing with the number
+                    // Adapter and manager initialisation
+                    viewManager = GridLayoutManager(activity, 2)
+                    viewAdapter = BookAdapter(books!!) { book : Book -> bookItemClicked(book) }
+
+                    recyclerView = view!!.findViewById<RecyclerView>(R.id.fragment_book_list_view).apply {
+
+                        // Improving performance by fixing layout size for fix content
+                        setHasFixedSize(true)
+
+                        // Setting linear layout manager
+                        layoutManager = viewManager
+
+                        // Setting view adapter
+                        adapter = viewAdapter
+
+                    }
+                }
+            })
+        }
+
+        /*model = ViewModelProviders.of(this).get(MyViewModel::class.java)
         model.getBooks().observe(this, Observer<Array<Book>>{ books ->
 
             // Adapter and manager initialisation
@@ -66,7 +95,7 @@ class FragmentBookList : Fragment() {
 
             }
 
-        })
+        })*/
 
 
         return view

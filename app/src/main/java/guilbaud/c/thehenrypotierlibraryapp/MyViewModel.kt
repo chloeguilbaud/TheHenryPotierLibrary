@@ -11,6 +11,8 @@ class MyViewModel : ViewModel() {
 
     private lateinit var books: MutableLiveData<Array<Book>>
 
+    val selected = MutableLiveData<Book>()
+
     fun getBooks(): LiveData<Array<Book>> {
         if (!::books.isInitialized) {
             books = MutableLiveData()
@@ -27,10 +29,15 @@ class MyViewModel : ViewModel() {
         books.value = bookList
     }
 
-    val selected = MutableLiveData<Book>()
-
     fun select(book: Book) {
+        Timber.plant(Timber.DebugTree())
+        Timber.i("Voew model not set " + selected.value)
         selected.value = book
+        Timber.i("Voew model setted " + selected.value)
+    }
+
+    fun getBookList(): LiveData<Array<Book>> {
+        return books
     }
 
 }

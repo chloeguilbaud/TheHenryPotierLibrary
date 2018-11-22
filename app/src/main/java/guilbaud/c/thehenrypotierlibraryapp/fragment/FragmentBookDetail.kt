@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import guilbaud.c.thehenrypotierlibraryapp.MyViewModel
 import guilbaud.c.thehenrypotierlibraryapp.R
 import guilbaud.c.thehenrypotierlibraryapp.model.Book
+import timber.log.Timber
 
 class FragmentBookDetail : Fragment() {
 
@@ -20,17 +21,35 @@ class FragmentBookDetail : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = inflater.inflate(R.layout.fragment_booklist, container, false)
+        val view = inflater.inflate(R.layout.fragment_bookdetails, container, false)
 
-        model = activity?.run {
+        Timber.plant(Timber.DebugTree())
+        Timber.i("FRAG 2")
+
+        /*model = activity?.run {
             ViewModelProviders.of(this).get(MyViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
+        Timber.i("FRAG 2 MAIN slected " + model.selected.value)
         model.selected.observe(this, Observer<Book> { book ->
+            Timber.i("FRAG 2 SELECTED MODIF")
             // Update the UI
             view!!.findViewById<TextView>(R.id.book_title).text = book!!.title
             view.findViewById<TextView>(R.id.book_price).text = book.price
             view.findViewById<TextView>(R.id.book_synopsis).text = book.synopsis[0]
-        })
+        })*/
+        //model = ViewModelProviders.of(parentFragment!!).get(MyViewModel::class.java)
+
+        activity?.let {
+            model = ViewModelProviders.of(it).get(MyViewModel::class.java)
+            model.selected.observe(this, Observer {
+                it?.let { book ->
+                    Timber.i("FRAG ref model " + book.title)
+                    view!!.findViewById<TextView>(R.id.book_title).text = book!!.title
+                    view.findViewById<TextView>(R.id.book_price).text = book.price
+                    view.findViewById<TextView>(R.id.book_synopsis).text = book.synopsis[0]
+                }
+            })
+        }
 
         return view
     }

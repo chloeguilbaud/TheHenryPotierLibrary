@@ -1,5 +1,6 @@
 package guilbaud.c.thehenrypotierlibraryapp
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -13,11 +14,16 @@ class LibraryActivity : AppCompatActivity(), FragmentBookList.OnBookItemClickLis
 
     var fragmentBookList: FragmentBookList = FragmentBookList()
     var fragmentBookDetail: FragmentBookDetail = FragmentBookDetail()
+    private var model: MyViewModel = MyViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_library)
+
+        this?.let {
+            model = ViewModelProviders.of(it).get(MyViewModel::class.java)
+        }
 
         // Activity initialisation
         initLandscapeMode()
