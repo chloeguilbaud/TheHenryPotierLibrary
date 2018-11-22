@@ -8,10 +8,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import guilbaud.c.thehenrypotierlibraryapp.adapter.BookAdapter
 import guilbaud.c.thehenrypotierlibraryapp.R
 import guilbaud.c.thehenrypotierlibraryapp.model.Book
 import guilbaud.c.thehenrypotierlibraryapp.service.BookService
+import timber.log.Timber
 
 /**
  * Fragment enabling book list display
@@ -25,6 +27,8 @@ class FragmentBookList : Fragment() {
 
     @VisibleForTesting
     lateinit var bookService: BookService
+
+    private lateinit var onItemClickListener : View.OnClickListener
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -48,7 +52,7 @@ class FragmentBookList : Fragment() {
 
         // Adapter and manager initialisation
         viewManager = GridLayoutManager(activity, 2)
-        viewAdapter = BookAdapter(books)
+        viewAdapter = BookAdapter(books) { book : Book -> bookItemClicked(book) }
 
         recyclerView = view!!.findViewById<RecyclerView>(R.id.fragment_book_list_view).apply {
 
@@ -64,6 +68,13 @@ class FragmentBookList : Fragment() {
         }
 
     }
+
+    fun bookItemClicked(book : Book) {
+        Timber.plant(Timber.DebugTree())
+        Timber.i("Clicked: " + book.title)
+    }
+
+
 
 
 }

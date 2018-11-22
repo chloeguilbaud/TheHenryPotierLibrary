@@ -14,38 +14,33 @@ import guilbaud.c.thehenrypotierlibraryapp.model.Book
  * Book adapter for RecycleView
  * @author Chloe GUILBAUD
  */
-class BookAdapter(private val books: Array<Book>) : RecyclerView.Adapter<BookAdapter.MyViewHolder>() {
+class BookAdapter(private val books: Array<Book>, val clickListener:
+    (Book) -> Unit) : RecyclerView.Adapter<BookViewHolder>() {
 
     // Reference to view for each data item
-    class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+    //class BookViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
     lateinit var viewGroup : ViewGroup
 
     override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): MyViewHolder {
+                                    viewType: Int): BookViewHolder {
         this.viewGroup = parent
 
         // Creating list item view
         val view : View =  LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_booklist_item, parent, false)
 
-        return MyViewHolder(view)
+        return BookViewHolder(view)
     }
 
 
     /**
      * Replace view content for list item
      */
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        val imageView = holder.view.findViewById<ImageView>(R.id.book_cover)
-        Glide
-            .with(viewGroup)
-            .load(books[position].cover)
-            .into(imageView);
-        holder.view.findViewById<TextView>(R.id.book_title).text = books[position].title
-        holder.view.findViewById<TextView>(R.id.book_price).text = books[position].price
+        (holder as BookViewHolder).bind(books[position], clickListener)
     }
 
     // Return book list size

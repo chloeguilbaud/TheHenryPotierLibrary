@@ -23,7 +23,7 @@ class BookService {
         var bookList : MutableList<Book> = mutableListOf()
 
         // Plant Timber logger
-        Timber.plant(Timber.DebugTree());
+        Timber.plant(Timber.DebugTree())
 
         // Build Retrofit
         val retrofit = Retrofit.Builder()
