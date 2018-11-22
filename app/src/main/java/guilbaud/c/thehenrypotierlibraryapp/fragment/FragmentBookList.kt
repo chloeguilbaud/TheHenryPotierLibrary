@@ -74,7 +74,7 @@ class FragmentBookList : Fragment() {
         }
 
         //viewManager = GridLayoutManager(activity, 2)
-        viewManager = LinearLayoutManager(activity)
+        viewManager = GridLayoutManager(activity, 2)
         viewAdapter = BookAdapter(books)
 
         recyclerView = view!!.findViewById<RecyclerView>(R.id.fragment_book_list_view).apply {
