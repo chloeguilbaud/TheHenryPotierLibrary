@@ -17,36 +17,33 @@ class BookService {
     /**
      * Fetches books and returns the list from http://henri-potier.xebia.fr/
      */
-    fun fetchBooks(act : LibraryActivity) : MutableList<Book> {
+    fun fetchBooks(act : LibraryActivity) {
 
         var bookList : MutableList<Book> = mutableListOf()
 
-        // Plant logger cf. Android Timber
-        // Indique comment on va logger
+        // Plant Timber logger
         Timber.plant(Timber.DebugTree());
 
-        // TODO build Retrofit
+        // Build Retrofit
         val retrofit = Retrofit.Builder()
             .baseUrl("http://henri-potier.xebia.fr/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        // TODO create a service
+        // Create a service
         val api = retrofit.create(BookApi::class.java)
 
-        // TODO listBooks()
+        Timber.i("Book service : Getting book list...")
 
-        Timber.i("BEFORE GETTING BOOKS")
-
-        // TODO enqueue call and display book title
+        // Calling book API
         api.listBooks().enqueue(object : Callback<Array<Book>> {
 
             override fun onResponse(call: Call<Array<Book>>?, response: Response<Array<Book>>?) {
-                act.processBookLib(response!!.body()!!)
+                act.onBookServiceSuccess(response!!.body()!!)
                /* response!!.body()!!.forEach {
                     // TODO log books
                     Timber.i("Book: %s", it.toString())
-                    act.processBookLib(it)
+                    act.onBookServiceSuccess(it)
                     // it : itérateur disponible dans l'itération
                 }*/
                 // !! : check not null
@@ -54,12 +51,12 @@ class BookService {
             }
 
             override fun onFailure(call: Call<Array<Book>>?, t: Throwable?) {
+                // TODO act.bookServiceError()
                 Timber.e("FAILLURE \n%s\ncall: %s", t.toString(), call)
             }
 
         })
 
-        return bookList
     }
 
 }

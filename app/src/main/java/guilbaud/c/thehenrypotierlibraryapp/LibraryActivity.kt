@@ -40,21 +40,12 @@ class LibraryActivity : AppCompatActivity() {
             findViewById<FrameLayout>(R.id.containerFrameLayout2).visibility = View.VISIBLE
         }
 
-        val bookList : MutableList<Book> = bookService.fetchBooks(this);
-        Timber.plant(Timber.DebugTree());
-        Timber.i("BOOK LIST FROM ACTIVIITY" + bookList.size)
-        bookList.forEach {
-            // TODO log books
-            Timber.i("Book Mouha ! : %s", it.toString())
-            // it : itérateur disponible dans l'itération
-        }
-
     }
 
-    fun processBookLib(books : Array<Book>) {
+    fun onBookServiceSuccess(books : Array<Book>) {
         books.forEach {
             // TODO log books
-            Timber.i("Book processBookLib ! : %s", it.toString())
+            Timber.i("Book onBookServiceSuccess ! : %s", it.toString())
             // it : itérateur disponible dans l'itération
         }
     }
