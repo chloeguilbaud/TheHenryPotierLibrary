@@ -73,8 +73,8 @@ class FragmentBookList : Fragment() {
             Timber.i("Book onBookServiceSuccess ! : %s", it.toString())
         }
 
-        viewManager = GridLayoutManager(activity, 2)
-        //viewManager = LinearLayoutManager(activity)
+        //viewManager = GridLayoutManager(activity, 2)
+        viewManager = LinearLayoutManager(activity)
         viewAdapter = BookAdapter(books)
 
         recyclerView = view!!.findViewById<RecyclerView>(R.id.fragment_book_list_view).apply {

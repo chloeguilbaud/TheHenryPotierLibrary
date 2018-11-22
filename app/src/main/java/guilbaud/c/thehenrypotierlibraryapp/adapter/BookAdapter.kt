@@ -30,6 +30,7 @@ class BookAdapter(private val books: Array<Book>) : RecyclerView.Adapter<BookAda
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.view.findViewById<TextView>(R.id.book_title).text = books[position].title
+        holder.view.findViewById<TextView>(R.id.book_price).text = books[position].price
     }
 
     // Return the size of your dataset (invoked by the layout manager)

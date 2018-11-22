@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
 
-   <!--<ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_launcher_foreground"
-            android:id="@+id/imageView" android:layout_weight="1"/>-->
-    <TextView
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
+<LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:srcCompat="@drawable/no_photo_found"
+                android:id="@+id/imageView3"
+                android:layout_weight="1"/>
+        <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/book_title"
                 android:textSize="15sp"
-                android:padding="10dp">
-
-    </TextView>
+                android:padding="10dp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/book_price"
+                android:textSize="15sp"
+                android:padding="10dp"/>
 
 </LinearLayout>
