@@ -6,8 +6,9 @@ import android.view.View
 import android.widget.FrameLayout
 import guilbaud.c.thehenrypotierlibraryapp.fragment.FragmentBookDetail
 import guilbaud.c.thehenrypotierlibraryapp.fragment.FragmentBookList
+import timber.log.Timber
 
-class LibraryActivity : AppCompatActivity() {
+class LibraryActivity : AppCompatActivity(), FragmentBookList.OnBookItemClickListener {
 
     var fragmentBookList: FragmentBookList = FragmentBookList()
     var fragmentBookDetail: FragmentBookDetail = FragmentBookDetail()
@@ -41,4 +42,14 @@ class LibraryActivity : AppCompatActivity() {
         }
 
     }
+
+    override fun onClick() {
+        Timber.plant(Timber.DebugTree())
+        Timber.i("Clicked MAIN ACTIVITY")
+        supportFragmentManager.beginTransaction()
+            .addToBackStack(FragmentBookDetail::class.java.name) // Ajout a backtake qui permet retour fragment d'avant a appuis sur bouton retour
+            .replace(R.id.containerFrameLayout1, FragmentBookDetail())
+            .commit()
+    }
+
 }
