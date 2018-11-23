@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TheHenryPotierLibraryApp</string>
+    <string name="book_cover_image">Book cover image</string>
 </resources>

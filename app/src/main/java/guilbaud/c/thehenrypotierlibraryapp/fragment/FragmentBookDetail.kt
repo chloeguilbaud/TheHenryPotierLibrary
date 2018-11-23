@@ -7,7 +7,9 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import guilbaud.c.thehenrypotierlibraryapp.view.model.BookViewModel
 import guilbaud.c.thehenrypotierlibraryapp.R
 
@@ -23,6 +25,11 @@ class FragmentBookDetail : Fragment() {
             model = ViewModelProviders.of(it).get(BookViewModel::class.java)
             model.selected.observe(this, Observer {
                 it?.let { book ->
+                    val imageView = view.findViewById<ImageView>(R.id.book_cover)
+                    Glide
+                        .with(view)
+                        .load(book.cover)
+                        .into(imageView);
                     view.findViewById<TextView>(R.id.book_title).text = book.title
                     view.findViewById<TextView>(R.id.book_price).text = book.price
                     view.findViewById<TextView>(R.id.book_synopsis).text = book.synopsis[0]
