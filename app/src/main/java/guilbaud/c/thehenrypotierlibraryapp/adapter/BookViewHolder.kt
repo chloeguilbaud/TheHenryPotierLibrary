@@ -8,9 +8,16 @@ import com.bumptech.glide.Glide
 import guilbaud.c.thehenrypotierlibraryapp.R
 import guilbaud.c.thehenrypotierlibraryapp.model.Book
 
-// Reference to view for each data item
+/**
+ * Book view handler for recycle view book list
+ * Reference to view for each data item
+ * @author Chloe GUILBAUD
+ */
 class BookViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
+    /**
+     * View creation
+     */
     fun bind(book: Book, clickListener: (Book) -> Unit) {
         val imageView = view.findViewById<ImageView>(R.id.book_cover)
         Glide

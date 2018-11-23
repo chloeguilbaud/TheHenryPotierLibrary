@@ -1,28 +1,37 @@
-package guilbaud.c.thehenrypotierlibraryapp
+package guilbaud.c.thehenrypotierlibraryapp.activity
 
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.FrameLayout
+import guilbaud.c.thehenrypotierlibraryapp.R
 import guilbaud.c.thehenrypotierlibraryapp.fragment.FragmentBookDetail
 import guilbaud.c.thehenrypotierlibraryapp.fragment.FragmentBookList
-import guilbaud.c.thehenrypotierlibraryapp.model.Book
-import timber.log.Timber
+import guilbaud.c.thehenrypotierlibraryapp.view.model.BookViewModel
 
+/**
+ * Library main activity
+ * @author Chloe GUILBAUD
+ */
 class LibraryActivity : AppCompatActivity(), FragmentBookList.OnBookItemClickListener {
 
+    // View fragments
     var fragmentBookList: FragmentBookList = FragmentBookList()
     var fragmentBookDetail: FragmentBookDetail = FragmentBookDetail()
-    private var model: MyViewModel = MyViewModel()
+
+    // Shared view model
+    private var model: BookViewModel =
+        BookViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_library)
 
-        this?.let {
-            model = ViewModelProviders.of(it).get(MyViewModel::class.java)
+        // View model initialisation
+        this.let {
+            model = ViewModelProviders.of(it).get(BookViewModel::class.java)
         }
 
         // Activity initialisation
@@ -50,12 +59,15 @@ class LibraryActivity : AppCompatActivity(), FragmentBookList.OnBookItemClickLis
 
     }
 
+    /**
+     * Called on book list item in first fragment
+     * Updates the view and displays the selected book details
+     */
     override fun onClick() {
         supportFragmentManager.beginTransaction()
-            .addToBackStack(FragmentBookDetail::class.java.name) // Ajout a backtake qui permet retour fragment d'avant a appuis sur bouton retour
+            .addToBackStack(FragmentBookDetail::class.java.name) // For phone return button
             .replace(R.id.containerFrameLayout1, fragmentBookDetail)
             .commit()
-//        fragmentBookDetail.updateView(book)
     }
 
 }

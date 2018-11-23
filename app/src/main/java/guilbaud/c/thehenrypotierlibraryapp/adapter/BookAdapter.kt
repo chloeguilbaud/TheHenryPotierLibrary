@@ -4,9 +4,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import com.bumptech.glide.Glide
 import guilbaud.c.thehenrypotierlibraryapp.R
 import guilbaud.c.thehenrypotierlibraryapp.model.Book
 
@@ -16,9 +13,6 @@ import guilbaud.c.thehenrypotierlibraryapp.model.Book
  */
 class BookAdapter(private val books: Array<Book>, val clickListener:
     (Book) -> Unit) : RecyclerView.Adapter<BookViewHolder>() {
-
-    // Reference to view for each data item
-    //class BookViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
     lateinit var viewGroup : ViewGroup
 
@@ -35,12 +29,10 @@ class BookAdapter(private val books: Array<Book>, val clickListener:
 
 
     /**
-     * Replace view content for list item
+     * Replace view content for book list item
      */
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        (holder as BookViewHolder).bind(books[position], clickListener)
+        holder.bind(books[position], clickListener)
     }
 
     // Return book list size
