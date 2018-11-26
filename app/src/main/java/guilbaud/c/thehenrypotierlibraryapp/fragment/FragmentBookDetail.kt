@@ -25,14 +25,25 @@ class FragmentBookDetail : Fragment() {
             model = ViewModelProviders.of(it).get(BookViewModel::class.java)
             model.selected.observe(this, Observer {
                 it?.let { book ->
+
+                    // Building image and adding in view
                     val imageView = view.findViewById<ImageView>(R.id.book_cover)
                     Glide
                         .with(view)
                         .load(book.cover)
                         .into(imageView);
+
+                    // Setting book title and price in view
                     view.findViewById<TextView>(R.id.book_title).text = book.title
-                    view.findViewById<TextView>(R.id.book_price).text = book.price
-                    view.findViewById<TextView>(R.id.book_synopsis).text = book.synopsis[0]
+                    view.findViewById<TextView>(R.id.book_price).text = book.price + "€"
+
+                    // Creating synopsis text for view
+                    var synopsis : String = ""
+                    book.synopsis.forEach {
+                        synopsis += it + "\n\n"
+                    }
+                    view.findViewById<TextView>(R.id.book_synopsis).text = synopsis
+
                 }
             })
         }
