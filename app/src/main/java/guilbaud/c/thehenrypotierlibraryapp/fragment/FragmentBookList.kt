@@ -25,14 +25,10 @@ class FragmentBookList : Fragment() {
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
 
-    private var model: BookViewModel =
-        BookViewModel()
+    private var model: BookViewModel = BookViewModel()
 
     private var listener: OnBookItemClickListener? = null
 
-    /**
-     * Gets
-     */
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         when(context) {
@@ -41,11 +37,8 @@ class FragmentBookList : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         val view = inflater.inflate(R.layout.fragment_booklist, container, false)
-
         init()
-
         return view
     }
 

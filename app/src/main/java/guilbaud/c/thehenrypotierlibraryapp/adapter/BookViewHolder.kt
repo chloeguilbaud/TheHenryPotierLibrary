@@ -1,5 +1,6 @@
 package guilbaud.c.thehenrypotierlibraryapp.adapter
 
+import android.annotation.SuppressLint
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
@@ -25,7 +26,7 @@ class BookViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
             .load(book.cover)
             .into(imageView);
         view.findViewById<TextView>(R.id.book_title).text = book.title
-        view.findViewById<TextView>(R.id.book_price).text = book.price
+        view.findViewById<TextView>(R.id.book_price).text = book.price + R.string.devise
         view.setOnClickListener { clickListener(book) }
     }
 

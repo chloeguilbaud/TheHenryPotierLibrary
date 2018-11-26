@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">TheHenryPotierLibraryApp</string>
     <string name="book_cover_image">Book cover image</string>
+    <string name="book_cover">Book cover</string>
+    <string name="no_book_title_available">No book title available</string>
+    <string name="no_book_price_available">No book price available</string>
+    <string name="devise">€</string>
 </resources>
