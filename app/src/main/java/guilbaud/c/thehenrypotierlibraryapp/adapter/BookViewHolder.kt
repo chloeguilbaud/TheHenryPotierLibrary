@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import guilbaud.c.thehenrypotierlibraryapp.R
 import guilbaud.c.thehenrypotierlibraryapp.model.Book
+import timber.log.Timber
 
 /**
  * Book view handler for recycle view book list
@@ -26,7 +27,7 @@ class BookViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
             .load(book.cover)
             .into(imageView);
         view.findViewById<TextView>(R.id.book_title).text = book.title
-        view.findViewById<TextView>(R.id.book_price).text = book.price + R.string.devise
+        view.findViewById<TextView>(R.id.book_price).text = book.price + "€"
         view.setOnClickListener { clickListener(book) }
     }
 

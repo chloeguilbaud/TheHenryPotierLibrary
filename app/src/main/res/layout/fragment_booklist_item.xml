@@ -39,6 +39,7 @@
                                 android:text="@string/no_book_title_available"
                                 android:textSize="15sp"
                                 android:padding="5dp"/>
+
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
