@@ -46,13 +46,13 @@ class LibraryActivity : AppCompatActivity(), FragmentBookList.OnBookItemClickLis
         // Setting fragment in view in first containerFrameLayout1
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.containerFrameLayout1, fragmentBookList)
+            .replace(R.id.containerFrameLayout1, FragmentBookList())
             .commit()
-        findViewById<FrameLayout>(R.id.containerFrameLayout2).visibility = View.INVISIBLE
+        findViewById<FrameLayout>(R.id.containerFrameLayout2).visibility = View.GONE
 
         if(landscape) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.containerFrameLayout2, fragmentBookDetail)
+                .replace(R.id.containerFrameLayout2, FragmentBookDetail())
                 .commit()
             findViewById<FrameLayout>(R.id.containerFrameLayout2).visibility = View.VISIBLE
         }
@@ -66,7 +66,7 @@ class LibraryActivity : AppCompatActivity(), FragmentBookList.OnBookItemClickLis
     override fun onClick() {
         supportFragmentManager.beginTransaction()
             .addToBackStack(FragmentBookDetail::class.java.name) // For phone return button
-            .replace(R.id.containerFrameLayout1, fragmentBookDetail)
+            .replace(R.id.containerFrameLayout2, FragmentBookDetail())
             .commit()
     }
 
