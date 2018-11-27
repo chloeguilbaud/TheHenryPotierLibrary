@@ -17,11 +17,11 @@ import guilbaud.c.thehenrypotierlibraryapp.view.model.BookViewModel
 class LibraryActivity : AppCompatActivity(), FragmentBookList.OnBookItemClickListener {
 
     // View fragments
-    var fragmentBookList: FragmentBookList = FragmentBookList()
-    var fragmentBookDetail: FragmentBookDetail = FragmentBookDetail()
+    private var fragmentBookList: FragmentBookList = FragmentBookList()
+    private var fragmentBookDetail: FragmentBookDetail = FragmentBookDetail()
     var landscape : Boolean = false
-    lateinit var layout1 : FrameLayout
-    lateinit var layout2 : FrameLayout
+    private lateinit var layout1 : FrameLayout
+    private lateinit var layout2 : FrameLayout
 
     // Shared view model
     private var model: BookViewModel =

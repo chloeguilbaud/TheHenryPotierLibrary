@@ -1,6 +1,5 @@
 package guilbaud.c.thehenrypotierlibraryapp.service
 
-import guilbaud.c.thehenrypotierlibraryapp.fragment.FragmentBookList
 import guilbaud.c.thehenrypotierlibraryapp.model.Book
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,7 +43,6 @@ class BookService {
                 }
 
                 override fun onFailure(call: Call<Array<Book>>?, t: Throwable?) {
-                    // TODO fragmentBookList.bookServiceError()
                     Timber.e("FAILLURE \n%s\ncall: %s", t.toString(), call)
                 }
 

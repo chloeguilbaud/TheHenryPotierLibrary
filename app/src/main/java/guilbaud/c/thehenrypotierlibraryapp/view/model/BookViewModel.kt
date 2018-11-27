@@ -5,7 +5,6 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import guilbaud.c.thehenrypotierlibraryapp.model.Book
 import guilbaud.c.thehenrypotierlibraryapp.service.BookService
-import timber.log.Timber
 
 /**
  * Shared view model enabling book access and model updates
@@ -14,7 +13,6 @@ import timber.log.Timber
 class BookViewModel : ViewModel() {
 
     private lateinit var books: MutableLiveData<Array<Book>>
-
     val selected = MutableLiveData<Book>()
 
     /**
@@ -43,10 +41,7 @@ class BookViewModel : ViewModel() {
     }
 
     fun select(book: Book) {
-        Timber.plant(Timber.DebugTree())
-        Timber.i("Voew model not set " + selected.value)
         selected.value = book
-        Timber.i("Voew model setted " + selected.value)
     }
 
 }

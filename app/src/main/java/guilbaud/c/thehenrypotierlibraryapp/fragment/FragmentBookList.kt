@@ -10,10 +10,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import guilbaud.c.thehenrypotierlibraryapp.view.model.BookViewModel
 import guilbaud.c.thehenrypotierlibraryapp.adapter.BookAdapter
 import guilbaud.c.thehenrypotierlibraryapp.R
 import guilbaud.c.thehenrypotierlibraryapp.model.Book
+import timber.log.Timber
 
 /**
  * Fragment enabling book list display
@@ -50,10 +53,10 @@ class FragmentBookList : Fragment() {
         activity?.let {
             model = ViewModelProviders.of(it).get(BookViewModel::class.java)
             model.getBooks().observe(this, Observer {
-                it?.let {books ->
+                it?.let { books ->
                     // Adapter and manager initialisation
                     viewManager = GridLayoutManager(activity, 2)
-                    viewAdapter = BookAdapter(books!!) { book : Book -> bookItemClicked(book) }
+                    viewAdapter = BookAdapter(books) { book: Book -> bookItemClicked(book) }
                     // Recycle view initialisation
                     recyclerView = view!!.findViewById<RecyclerView>(R.id.fragment_book_list_view).apply {
 
