@@ -20,6 +20,8 @@ class LibraryActivity : AppCompatActivity(), FragmentBookList.OnBookItemClickLis
     var fragmentBookList: FragmentBookList = FragmentBookList()
     var fragmentBookDetail: FragmentBookDetail = FragmentBookDetail()
     var landscape : Boolean = false
+    lateinit var layout1 : FrameLayout
+    lateinit var layout2 : FrameLayout
 
     // Shared view model
     private var model: BookViewModel =
@@ -42,20 +44,23 @@ class LibraryActivity : AppCompatActivity(), FragmentBookList.OnBookItemClickLis
 
     private fun initLandscapeMode() {
 
+        // Global variable initialisation
         landscape = resources.getBoolean(R.bool.landscape)
+        layout1 = findViewById(R.id.containerFrameLayout1)
+        layout2 = findViewById(R.id.containerFrameLayout2)
 
         // Setting fragment in view in first containerFrameLayout1
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.containerFrameLayout1, fragmentBookList)
             .commit()
-        findViewById<FrameLayout>(R.id.containerFrameLayout2).visibility = View.GONE
+        layout2.visibility = View.GONE
 
         if(landscape) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.containerFrameLayout2, fragmentBookDetail)
                 .commit()
-            findViewById<FrameLayout>(R.id.containerFrameLayout2).visibility = View.VISIBLE
+            layout2.visibility = View.VISIBLE
         }
 
     }
@@ -67,11 +72,11 @@ class LibraryActivity : AppCompatActivity(), FragmentBookList.OnBookItemClickLis
     override fun onClick() {
 
         if(!landscape) {
-            findViewById<FrameLayout>(R.id.containerFrameLayout1).visibility = View.GONE
-            findViewById<FrameLayout>(R.id.containerFrameLayout2).visibility = View.VISIBLE
+            layout1.visibility = View.GONE
+            layout2.visibility = View.VISIBLE
         } else {
-            findViewById<FrameLayout>(R.id.containerFrameLayout1).visibility = View.VISIBLE
-            findViewById<FrameLayout>(R.id.containerFrameLayout2).visibility = View.VISIBLE
+            layout1.visibility = View.VISIBLE
+            layout2.visibility = View.VISIBLE
         }
 
         // Detail view update
@@ -82,27 +87,24 @@ class LibraryActivity : AppCompatActivity(), FragmentBookList.OnBookItemClickLis
 
     }
 
+    /**
+     * Back button management
+     */
     override fun onBackPressed() {
-        // Getting BookView (right part)
-        var element: FrameLayout = findViewById(R.id.containerFrameLayout2)
-        // If orientation is portrait and bookview is visible
-        if(!resources.getBoolean(R.bool.landscape) &&
-            element.visibility == View.VISIBLE) {
+
+        // If orientation is portrait and book detail view is visible
+        if(!landscape && layout2.visibility == View.VISIBLE) {
             // Hide BookView and show only List
             supportFragmentManager.beginTransaction()
                 .replace(R.id.containerFrameLayout1, fragmentBookList)
                 .commit()
-            findViewById<FrameLayout>(R.id.containerFrameLayout1).visibility = View.VISIBLE
-            findViewById<FrameLayout>(R.id.containerFrameLayout2).visibility = View.GONE
+            layout1.visibility = View.VISIBLE
+            layout2.visibility = View.GONE
 
         } else {
-            // Else normal behaviour
+            // Normal behaviour
             super.onBackPressed()
         }
-    }
-
-    fun displayBookList() {
-
     }
 
 }
