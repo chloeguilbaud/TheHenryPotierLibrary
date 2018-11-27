@@ -1,8 +1,18 @@
 # TheHenryPotierLibrary
+Chloé Guilbaud
 
-ViewModel
-construction de la liste
+## Implémentation
+- Affichage de la liste des livres
+- Affichage du détail pour le livre sélectionné
+- Adaptation de la vue en mode paysage
+- Unités de mesures utilisées permettant une adaptation aux écrans
+- Utilisation de RecyclerView
+- Partage du modèle entre fragments via ViewModel
+- Utilisation de fragments
 
-Les tailles d’écrans sont classés en densité
-Android est capable de redimensionner à l’exécution en fonction de la densité du terminal
+## Retour sur expérience
+TheHenryPotierLibraryApp a permis l'application des notions apprissent en cours et d'aller plus loin via l'utilisation
+de RecyclerView mais aussi à travers des recherches complémentaires sur les bonnes pratiques à appliquer en programmation sur la platform
+Android.
+
 
